@@ -28,23 +28,23 @@ bool Board::isFull() const {
 }
 
 Board::Span Board::getHorizontal(int x, int y) const {
-    auto left = this->data.at(y).at(x);
-    auto center = this->data.at(y).at(x + 1);
-    auto right = this->data.at(y).at(x + 2);
+    auto left = this->data[y][x];
+    auto center = this->data[y][x + 1];
+    auto right = this->data[y][x + 2];
     return {left, center, right};
 }
 
 Board::Span Board::getVertical(int x, int y) const {
-    auto top = this->data.at(y).at(x);
-    auto center = this->data.at(y + 1).at(x);
-    auto bottom = this->data.at(y + 2).at(x);
+    auto top = this->data[y][x];
+    auto center = this->data[y + 1][x];
+    auto bottom = this->data[y + 2][x];
     return {top, center, bottom};
 }
 
 Board::Span Board::getDiagonal(int x, int y) const {
-    auto first = this->data.at(y).at(x);
-    auto second = this->data.at(y - 1).at(x + 1);
-    auto third = this->data.at(y - 2).at(x + 2);
+    auto first = this->data[y][x];
+    auto second = this->data[y - 1][x + 1];
+    auto third = this->data[y - 2][x + 2];
     return {first, second, third};
 }
 
