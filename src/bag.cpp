@@ -5,10 +5,12 @@
 
 Bag::Bag(std::mt19937_64& rng) {
     this->pieces.reserve(12);
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 5; i++) {
         this->pieces.push_back(Tile::F);
         this->pieces.push_back(Tile::X);
     }
+    this->pieces.push_back(Tile::O);
+    this->pieces.push_back(Tile::O);
     // Shuffle the pieces
     for (int i = 0; i < this->pieces.size() - 1; i++) {
         auto sz = this->pieces.size() - i + 1;
