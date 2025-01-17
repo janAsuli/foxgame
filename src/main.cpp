@@ -41,8 +41,12 @@ void runTask(int seed, int count, int threadCount, int threadI) {
     totalLosses += losses;
 }
 
-int main() {
-    int x = 1'000'000;
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cerr << "Usage: foxgame <N>" << std::endl;
+        return -1;
+    }
+    int x = std::stoi(argv[1]);
     auto threadCount = std::thread::hardware_concurrency();
     std::vector<std::thread> threadPool;
     threadPool.reserve(threadCount);
