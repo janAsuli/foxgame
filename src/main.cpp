@@ -1,15 +1,16 @@
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
+#include <random>
 
 #include "board.hpp"
 
 // Runs a game, and returns whether the player won
-bool runGame() {
+bool runGame(std::mt19937_64& rng) {
     Board board;
-    Bag bag;
+    Bag bag(rng);
     while (!bag.isEmpty()) {
-        board.placeTile(bag);
+        board.placeTile(rng, bag);
         if (board.hasFox()) {
             return false;
         }
@@ -18,13 +19,13 @@ bool runGame() {
 }
 
 int main() {
-    std::srand(std::time(nullptr));
+    auto rng = std::mt19937_64(std::time(nullptr));
     // Run x games, and see how many are wins
     int x = 1'000'000;
     int wins = 0;
     int losses = 0;
     for (int i = 0; i < x; i++) {
-        if (runGame()) {
+        if (runGame(rng)) {
             wins++;
         } else {
             losses++;

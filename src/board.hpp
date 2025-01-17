@@ -3,6 +3,7 @@
 #include <array>
 #include <exception>
 #include <optional>
+#include <random>
 
 #include "bag.hpp"
 #include "tile.hpp"
@@ -26,6 +27,6 @@ public:
   Board();
   bool hasFox() const;
   bool isFull() const;
-  void placeTile(Bag& bag);
+  void placeTile(std::mt19937_64& rng, Bag& bag);
   void output() const;
 };

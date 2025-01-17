@@ -3,7 +3,7 @@
 
 #include "bag.hpp"
 
-Bag::Bag() {
+Bag::Bag(std::mt19937_64& rng) {
     this->pieces.reserve(12);
     for (int i = 0; i < 6; i++) {
         this->pieces.push_back(Tile::F);
@@ -12,7 +12,7 @@ Bag::Bag() {
     // Shuffle the pieces
     for (int i = 0; i < this->pieces.size() - 1; i++) {
         auto sz = this->pieces.size() - i + 1;
-        int j = std::rand() % sz + i;
+        int j = rng() % sz + i;
         std::swap(this->pieces[i], this->pieces[j]);
     }
 }

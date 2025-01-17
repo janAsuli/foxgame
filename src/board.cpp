@@ -88,7 +88,7 @@ bool Board::hasFox() const {
     return false;
 }
 
-void Board::placeTile(Bag& bag) {
+void Board::placeTile(std::mt19937_64& rng, Bag& bag) {
     int emptySpaces = 0;
     for (auto row: this->data) {
         for (auto space: row) {
@@ -102,7 +102,7 @@ void Board::placeTile(Bag& bag) {
         throw BoardFullException();
     }
 
-    int i = std::rand() % emptySpaces;
+    int i = rng() % emptySpaces;
     int targetI = 0;
     for (int y = 0; y < 4; y++) {
         for (int x = 0; x < 4; x++) {
