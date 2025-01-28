@@ -1,7 +1,16 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.28)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
 project(foxgame CXX)
 
-add_executable(foxgame src/main.cpp src/board.cpp src/bag.cpp)
+add_executable(foxgame)
+target_sources(foxgame
+  PUBLIC
+    src/main.cpp)
+target_sources(foxgame
+  PUBLIC
+    FILE_SET all_my_modules TYPE CXX_MODULES FILES
+    src/bag.cppm
+    src/board.cppm
+    src/tile.cppm)

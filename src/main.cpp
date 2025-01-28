@@ -6,7 +6,9 @@
 #include <thread>
 #include <vector>
 
-#include "board.hpp"
+import Bag;
+import Board;
+import Tile;
 
 // Runs a game, and returns whether the player won
 bool runGame(std::mt19937_64& rng) {

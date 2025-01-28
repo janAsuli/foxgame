@@ -1,8 +1,40 @@
+module;
+
+#include <array>
 #include <cstdlib>
+#include <exception>
 #include <iostream>
+#include <optional>
+#include <random>
 #include <utility>
 
-#include "board.hpp"
+import Bag;
+import Tile;
+
+export module Board;
+
+export class Board {
+public:
+    typedef std::optional<Tile> Item;
+    typedef std::array<Item, 3> Span;
+private:
+
+    std::array<std::array<Item, 4>, 4> data;
+
+    Span getHorizontal(int, int) const;
+    Span getVertical(int, int) const;
+    Span getDiagonal(int, int) const;
+
+    bool spanIsFox(Span&&) const;
+public:
+    Board();
+    bool hasFox() const;
+    bool isFull() const;
+    void placeTile(std::mt19937_64& rng, Bag& bag);
+    void output() const;
+};
+
+export class BoardFullException : public std::exception {};
 
 Board::Board() {
     for (int i = 0; i < 4; i++) {

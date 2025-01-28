@@ -1,7 +1,26 @@
-#include <cstdlib>
-#include <utility>
+module;
 
-#include "bag.hpp"
+#include <cstdlib>
+#include <exception>
+#include <random>
+#include <utility>
+#include <vector>
+
+export module Bag;
+
+import Tile;
+
+class BagEmptyException : public std::exception {};
+
+export class Bag {
+private:
+    std::vector<Tile> pieces;
+public:
+    Bag(std::mt19937_64&);
+    bool isEmpty() const;
+    Tile grab();
+};
+
 
 Bag::Bag(std::mt19937_64& rng) {
     this->pieces.reserve(12);
