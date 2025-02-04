@@ -23,10 +23,14 @@ bool runGame(std::mt19937_64& rng) {
     return true;
 }
 
+// The total number of wins
 static int totalWins = 0;
+// The total number of losses
 static int totalLosses = 0;
+// Used to make sure that multiple people don't write to wins and losses at the same time
 static std::mutex resultsLock;
 
+// The task that is run on each thread
 void runTask(int seed, int count, int threadCount, int threadI) {
     auto rng = std::mt19937_64(seed + threadI);
     int wins = 0;

@@ -13,27 +13,40 @@ import Tile;
 
 export module Board;
 
+// The game board
 export class Board {
 public:
+    // A single item, which can be a tile or empty
     typedef std::optional<Tile> Item;
+    // A span of items, which could spell FOX
     typedef std::array<Item, 3> Span;
 private:
-
+    // The data of the board
     std::array<std::array<Item, 4>, 4> data;
 
+    // Get a horizontal span at an X and Y
     Span getHorizontal(int, int) const;
+    // Get a vertical span at an X and Y
     Span getVertical(int, int) const;
+    // Get a diagonal span at an X and Y
     Span getDiagonal(int, int) const;
 
+    // Check whether a span spells fox, which means the game is over
     bool spanIsFox(Span&&) const;
 public:
+    // Create a new empty board
     Board();
+    // Return if the board has fox
     bool hasFox() const;
+    // Return if the board is full
     bool isFull() const;
+    // Place a tile in a random place
     void placeTile(std::mt19937_64& rng, Bag& bag);
+    // Output what the board looks like
     void output() const;
 };
 
+// Thrown if you try to place while the board is full.
 export class BoardFullException : public std::exception {};
 
 Board::Board() {

@@ -12,12 +12,17 @@ import Tile;
 
 class BagEmptyException : public std::exception {};
 
+// A bag that contains tiles
 export class Bag {
 private:
+    // The tiles in the bag
     std::vector<Tile> pieces;
 public:
+    // Creates a new bag and shuffles it with a seed
     Bag(std::mt19937_64&);
+    // Returns whether the bag has no more elements
     bool isEmpty() const;
+    // Gets the next tile from the bag
     Tile grab();
 };
 
