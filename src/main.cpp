@@ -1,7 +1,7 @@
+#include <atomic>
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
-#include <mutex>
 #include <random>
 #include <thread>
 #include <vector>
@@ -24,11 +24,9 @@ bool runGame(std::mt19937_64& rng) {
 }
 
 // The total number of wins
-static int totalWins = 0;
+static std::atomic<int> totalWins = 0;
 // The total number of losses
-static int totalLosses = 0;
-// Used to make sure that multiple people don't write to wins and losses at the same time
-static std::mutex resultsLock;
+static std::atomic<int> totalLosses = 0;
 
 // The task that is run on each thread
 void runTask(int seed, int count, int threadCount, int threadI) {
@@ -42,7 +40,6 @@ void runTask(int seed, int count, int threadCount, int threadI) {
             losses++;
         }
     }
-    std::lock_guard<std::mutex> lock(resultsLock);
     totalWins += wins;
     totalLosses += losses;
 }
