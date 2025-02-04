@@ -36,7 +36,7 @@ Bag::Bag(std::mt19937_64& rng) {
     this->pieces.push_back(Tile::O);
     this->pieces.push_back(Tile::O);
     // Shuffle the pieces
-    for (int i = 0; i < this->pieces.size() - 1; i++) {
+    for (unsigned long i = 0; i < this->pieces.size() - 1; i++) {
         auto sz = this->pieces.size() - i + 1;
         int j = rng() % sz + i;
         std::swap(this->pieces[i], this->pieces[j]);

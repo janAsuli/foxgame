@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
     std::vector<std::thread> threadPool;
     threadPool.reserve(threadCount);
     int seed = std::time(nullptr);
-    for (int i = 0; i < threadCount; i++) {
+    for (unsigned int i = 0; i < threadCount; i++) {
         threadPool.push_back(std::thread(runTask, seed, x, threadCount, i));
     }
     for (auto& thread: threadPool) {
